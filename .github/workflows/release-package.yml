@@ -39,6 +39,7 @@ jobs:
       - run: |
           cd ./js
           npm ci
+          npm run generate:types
         shell: bash
       - run: |
           cd ./js
