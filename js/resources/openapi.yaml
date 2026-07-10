@@ -1,0 +1,133 @@
+openapi: 3.0.1
+info:
+  title: qvyn-gateway-api
+  version: 1.0.0
+  description: |
+    # Changelog
+    
+    ## v0.0.1 (2026.07.09) - Viktor Balassa
+    - Openapi contract added. Single endpoint and no security this time.
+
+servers:
+  - url: http://localhost:8080
+    description: localhost
+paths:
+  /api/v1/promotions:
+    get:
+      summary: Get promotions
+      description: Fetch preselected promotion based on previous needs
+      operationId: getPromotions
+      tags:
+        - Promotions
+      security: [] # TODO: JWT token!!!
+      parameters:
+      # HEADER SECTION
+        - name: X-Correlation-Id
+          in: header
+          description: Unique identifier for processes
+          schema:
+            type: string
+            format: uuid
+            nullable: true
+        - name: X-Request-Id
+          in: header
+          description: Unique identifier for an individual request
+          schema:
+            type: string
+            format: uuid
+            nullable: true
+      responses:
+        "200":
+          description: Promotions successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PromotionsResponse"
+        "400":
+          description: Bad user request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+# --------------- SCHEMAS ---------------
+components:
+  # securitySchemes: # TODO: fix this! We need JWT token auth here!
+  schemas:
+    PromotionsResponse:
+      type: array
+      description: List of promotions
+      items:
+        $ref: "#/components/schemas/PromotionResponse"
+
+    PromotionResponse:
+      type: object
+      description: Individual promotion item to present in the dashboard
+      properties:
+        title:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        text:
+          type: string
+        logoCode:
+          type: string
+        promotionLast:
+          type: string
+          format: date-time
+        prize:
+          $ref: "#/components/schemas/Prize"
+    Prize:
+      type: object
+      description: Complex object for prizes >> original, discounted value and new prize
+      properties:
+        originalPrize:
+          type: number
+          format: double
+        discountedValue:
+          type: number
+          format: double
+        newPrize:
+          type: number
+          format: double
+
+    ErrorResponse:
+      type: object
+      description: Error structure with multiple error responses and a generic result code
+      properties:
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            $ref: "#/components/schemas/SingleErrorResponse"
+    SingleErrorResponse:
+      type: object
+      description: Generic error structure
+      properties:
+        errorCode:
+          type: string
+          description: A code for the dedicated error
+        errorText:
+          type: string
+          description: Human-readable error text

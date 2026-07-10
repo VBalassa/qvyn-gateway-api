@@ -1,0 +1,24 @@
+{
+  "name": "@vbalassa/qvyn-gateway-api",
+  "version": "1.0.0",
+  "description": "gateway api",
+  "homepage": "https://github.com/VBalassa/qvyn-gateway-api#readme",
+  "bugs": {
+    "url": "https://github.com/VBalassa/qvyn-gateway-api/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VBalassa/qvyn-gateway-api.git"
+  },
+  "license": "ISC",
+  "author": "Balassa Viktor",
+  "type": "commonjs",
+  "main": "index.js",
+  "devDependencies": {
+    "openapi-typescript": "^7.13.0"
+  },
+  "scripts": {
+    "generate:types": "openapi-typescript ./resources/openapi.yaml -o ./src/types/generated-models.ts",
+    "test": "exit 0"
+  }
+}

@@ -1,0 +1,39 @@
+name: Java and typescript package releasing
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24 # CHANGE: eredetileg 20 volt
+      - run: |
+         cd ./js
+         npm ci
+        shell: bash
+      - run: npm test
+
+  publish-gpr:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24 # CHANGE: eredetileg 20 volt
+          registry-url: https://npm.pkg.github.com/
+      - run: |
+          cd ./js
+          npm ci
+        shell: bash
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
