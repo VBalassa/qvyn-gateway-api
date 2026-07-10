@@ -1,8 +1,11 @@
 name: Java and typescript package releasing
 
 on:
-  release:
-    types: [published]
+#  release: # TODO: reset this after stable workflow running
+#    types: [published] # TODO: reset this after stable workflow running
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -16,7 +19,10 @@ jobs:
          cd ./js
          npm ci
         shell: bash
-      - run: npm test
+      - run: |
+          cd ./js
+          npm test
+        shell: bash
 
   publish-gpr:
     needs: build
@@ -34,6 +40,9 @@ jobs:
           cd ./js
           npm ci
         shell: bash
-      - run: npm publish
+      - run: | 
+          npm publish
+          cd ./js
+        shell: bash
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
