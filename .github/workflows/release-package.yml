@@ -40,9 +40,9 @@ jobs:
           cd ./js
           npm ci
         shell: bash
-      - run: | 
-          npm publish
+      - run: |
           cd ./js
+          npm publish
         shell: bash
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
