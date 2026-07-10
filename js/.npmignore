@@ -1,0 +1,7 @@
+index.js
+.npmrc
+package.json
+package-lock.json
+tsconfig.json
+resources/*
+.npmignore
