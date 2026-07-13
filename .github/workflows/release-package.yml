@@ -1,11 +1,12 @@
 name: Java and typescript package releasing
 
 on:
-#  release: # TODO: reset this after stable workflow running
-#    types: [published] # TODO: reset this after stable workflow running
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
+## HINT: use the settings below in case of development
+#  push:
+#    branches:
+#      - main
 
 jobs:
   typescript-build:
