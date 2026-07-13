@@ -1,6 +1,6 @@
 {
   "name": "@vbalassa/qvyn-gateway-api",
-  "version": "0.0.1+ts.1",
+  "version": "0.0.1-ts.1",
   "description": "gateway api",
   "homepage": "https://github.com/VBalassa/qvyn-gateway-api#readme",
   "bugs": {

@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>qvyn-java-generator</artifactId>
-    <version>0.0.2+java.1</version>
+    <version>0.0.1-java.1</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
