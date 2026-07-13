@@ -1,10 +1,9 @@
 openapi: 3.0.1
 info:
   title: qvyn-gateway-api
-  version: 1.0.0
+  version: 0.0.1
   description: |
-    # Changelog
-    
+    # Changelog    
     ## v0.0.1 (2026.07.09) - Viktor Balassa
     - Openapi contract added. Single endpoint and no security this time.
 
