@@ -71,6 +71,8 @@ jobs:
           cd ./java
           mvn clean package
       - name: Publish to GitHub Packages
-        run: mvn deploy
+        run: |
+          cd ./java
+          mvn deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
